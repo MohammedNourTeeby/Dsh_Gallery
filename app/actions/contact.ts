@@ -7,7 +7,6 @@ import { cookies } from 'next/headers';
 import { verifySessionToken } from '@/lib/session';
 import { revalidatePath } from 'next/cache';
 
-// دالة التحقق من المدير
 async function verifyAdmin() {
     const sessionToken = (await cookies()).get('admin_session')?.value;
     if (!sessionToken) throw new Error('غير مصرح');
@@ -15,7 +14,6 @@ async function verifyAdmin() {
     if (!isValid) throw new Error('غير مصرح');
 }
 
-// جلب معلومات الاتصال (للواجهة العامة)
 export async function getContactInfo() {
     try {
         const info = await db.select().from(contactInfo).limit(1);
@@ -26,31 +24,43 @@ export async function getContactInfo() {
     }
 }
 
-// تحديث معلومات الاتصال (للمدير فقط)
 export async function updateContactInfo(data: Partial<NewContactInfo>) {
     await verifyAdmin();
 
     try {
-        // إزالة الحقول ذات القيمة undefined من البيانات
-        const cleanData = Object.fromEntries(
-            Object.entries(data).filter(([_, v]) => v !== undefined)
-        );
-
         // التحقق من وجود سجل مسبق
         const existing = await db.select().from(contactInfo).limit(1);
 
         if (existing.length > 0) {
-            // تحديث السجل الموجود
+            // تحديث السجل الموجود: نأخذ فقط الحقول التي تم إرسالها (غير undefined)
+            const updateData: Partial<NewContactInfo> = {};
+            for (const [key, value] of Object.entries(data)) {
+                if (value !== undefined) {
+                    // استخدام any هنا لتجنب مشاكل TypeScript لأن key قد يكون من type string
+                    (updateData as any)[key] = value;
+                }
+            }
+            // نضيف updatedAt
             const [updated] = await db.update(contactInfo)
-                .set({ ...cleanData, updatedAt: new Date() })
+                .set({ ...updateData, updatedAt: new Date() })
                 .where(eq(contactInfo.id, existing[0].id))
                 .returning();
             revalidatePath('/admin/contact');
             return updated;
         } else {
-            // إنشاء سجل جديد
+            // إنشاء سجل جديد: يجب توفير جميع الحقول المطلوبة (phone, email, address)
+            const insertData: NewContactInfo = {
+                phone: data.phone ?? '',          // قيمة افتراضية إذا لم تقدم
+                email: data.email ?? '',          // قيمة افتراضية
+                address: data.address ?? '',      // قيمة افتراضية
+                facebook: data.facebook ?? null,  // اختياري
+                instagram: data.instagram ?? null,
+                twitter: data.twitter ?? null,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            };
             const [created] = await db.insert(contactInfo)
-                .values({ ...cleanData, createdAt: new Date(), updatedAt: new Date() })
+                .values(insertData)
                 .returning();
             revalidatePath('/admin/contact');
             return created;
