@@ -108,20 +108,19 @@ export function Header() {
     return (
         <header
             className={`sticky top-0 z-50 w-full transition-all duration-500 ${scrolled
-                    ? "bg-gradient-to-r from-indigo-900/90 via-purple-900/90 to-pink-900/90 backdrop-blur-xl border-b border-white/20 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)]"
-                    : "bg-transparent backdrop-blur-sm border-b border-transparent"
+                ? "bg-gradient-to-r from-indigo-900/90 via-purple-900/90 to-pink-900/90 backdrop-blur-xl border-b border-white/20 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)]"
+                : "bg-transparent backdrop-blur-sm border-b border-transparent"
                 }`}
         >
             <div className="container flex h-16 items-center justify-between px-4 md:px-6">
                 {/* الشعار المطور */}
-                <Link href="/" className="group relative flex items-center gap-2">
-                    <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-[0_0_40px_rgba(236,72,153,0.8)]">
-                        <span className="relative z-10 text-lg font-black text-white drop-shadow-md">DSH</span>
-                        <div className="absolute inset-0 bg-gradient-to-tl from-transparent via-white/30 to-transparent animate-shimmer" />
-                        <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600/20 to-pink-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Link href="/" className="group flex items-center gap-2">
+                    <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(236,72,153,0.6)]">
+                        <span className="relative z-10 text-lg font-black text-white">DSh</span>
+                        <div className="absolute inset-0 bg-gradient-to-tl from-transparent via-white/20 to-transparent animate-shimmer" />
                     </div>
-                    <span className="hidden text-xl font-bold bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 bg-clip-text text-transparent drop-shadow-md sm:inline-block group-hover:from-indigo-300 group-hover:to-pink-300 transition-all duration-300">
-                        DSH Gallery
+                    <span className="hidden text-xl font-bold bg-gradient-to-r from-indigo-600 to-pink-600 bg-clip-text text-transparent sm:inline-block">
+                        معمل الدقنيش
                     </span>
                 </Link>
 
@@ -138,8 +137,8 @@ export function Header() {
                                             <Link
                                                 href={item.href}
                                                 className={`group inline-flex h-10 w-max items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${active
-                                                        ? "bg-gradient-to-r from-indigo-500/20 to-pink-500/20 text-indigo-200 shadow-[0_0_15px_rgba(139,92,246,0.3)]"
-                                                        : "bg-background/50 text-gray-300 hover:bg-gradient-to-r hover:from-indigo-500/10 hover:to-pink-500/10 hover:text-indigo-200 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)]"
+                                                    ? "bg-gradient-to-r from-indigo-500/20 to-pink-500/20 text-indigo-200 shadow-[0_0_15px_rgba(139,92,246,0.3)]"
+                                                    : "bg-background/50 text-gray-300 hover:bg-gradient-to-r hover:from-indigo-500/10 hover:to-pink-500/10 hover:text-indigo-200 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)]"
                                                     }`}
                                             >
                                                 <Icon className={`h-4 w-4 transition-all duration-300 ${active ? 'scale-110 text-indigo-300' : 'group-hover:scale-110 group-hover:text-indigo-300'

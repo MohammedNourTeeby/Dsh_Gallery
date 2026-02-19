@@ -14,7 +14,7 @@ export default async function Home() {
           <div className="absolute inset-0 -z-10 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 blur-3xl" />
           <h1 className="relative mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">
             <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
-              مرحبًا بك في معرض DSH
+              مرحبًا بك في معمل الدقنيش
             </span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground md:text-xl">
