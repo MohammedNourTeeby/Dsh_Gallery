@@ -17,7 +17,14 @@ export const metadata: Metadata = {
   title: 'معمل الدقنيش',
   description: 'معرض فني يضم مجموعة مميزة من اللوحات والتماثيل والأعمال الفنية',
   icons: {
-    icon: '/icon.ico', // أو '/icon.png'
+    icon: [
+      { url: '/icon.ico' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
   openGraph: {
     title: 'معمل الدقنيش',
