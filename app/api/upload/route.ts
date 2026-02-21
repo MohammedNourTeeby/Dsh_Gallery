@@ -24,7 +24,12 @@ export async function POST(request: Request) {
         // رفع الصورة إلى Cloudinary
         const result = await new Promise((resolve, reject) => {
             cloudinary.uploader.upload_stream(
-                { folder: 'gallery', resource_type: 'auto' },
+                {
+                    folder: 'gallery', resource_type: 'auto', transformation: [
+                        { width: 1200, height: 1200, crop: 'limit' }, // تحديد أقصى حجم
+                        { quality: 'auto' } // ضغط تلقائي
+                    ]
+                },
                 (error, result) => {
                     if (error) reject(error);
                     else resolve(result);

@@ -96,7 +96,7 @@ export function ProductCard({
                         {product.category}
                     </span>
                     <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600">
-                        {product.price} <span className="text-sm">ر.س</span>
+                        {product.price} <span className="text-sm">$</span>
                     </span>
                 </div>
 
