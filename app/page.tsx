@@ -2,6 +2,7 @@
 import { getPublicProducts } from '@/app/actions/products';
 import { ProductCard } from '@/components/admin/ProductCard';
 import { Sparkles, ArrowLeft } from 'lucide-react';
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const products = await getPublicProducts();

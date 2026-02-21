@@ -3,6 +3,7 @@ import { getPublicProducts } from '@/app/actions/products';
 import { ProductCard } from '@/components/admin/ProductCard';
 import { Package, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+export const dynamic = 'force-dynamic';
 
 export default async function ProductsPage() {
     const products = await getPublicProducts();

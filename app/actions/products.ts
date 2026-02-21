@@ -57,6 +57,8 @@ export async function updateProduct(id: number, productData: Partial<NewProduct>
         };
 
         revalidatePath('/admin/products');
+        revalidatePath('/');           // تحديث الصفحة الرئيسية
+        revalidatePath('/products');   // تحديث صفحة جميع المنتجات
         return serialized;
     } catch (error) {
         console.error('خطأ في تحديث المنتج:', error);
@@ -69,6 +71,8 @@ export async function deleteProduct(id: number) {
     try {
         await db.delete(products).where(eq(products.id, id));
         revalidatePath('/admin/products');
+        revalidatePath('/');           // تحديث الصفحة الرئيسية
+        revalidatePath('/products');   // تحديث صفحة جميع المنتجات
         return { success: true };
     } catch (error) {
         console.error('خطأ في حذف المنتج:', error);
@@ -85,4 +89,5 @@ export async function getPublicProducts() {
         console.error('خطأ في جلب المنتجات:', error);
         return [];
     }
+
 }
