@@ -46,6 +46,8 @@ export async function updateContactInfo(data: Partial<NewContactInfo>) {
                 .where(eq(contactInfo.id, existing[0].id))
                 .returning();
             revalidatePath('/admin/contact');
+            revalidatePath('/contact'); // أضف هذا السطر
+
             return updated;
         } else {
             // إنشاء سجل جديد: يجب توفير جميع الحقول المطلوبة (phone, email, address)
@@ -63,6 +65,8 @@ export async function updateContactInfo(data: Partial<NewContactInfo>) {
                 .values(insertData)
                 .returning();
             revalidatePath('/admin/contact');
+            revalidatePath('/contact'); // أضف هذا السطر
+
             return created;
         }
     } catch (error) {
